@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<bean id="s1" class="com.ted.spring.di.Student">
@@ -14,5 +15,76 @@
 		<constructor-arg value="李二"></constructor-arg>
 		<constructor-arg value="25"></constructor-arg>
 		<constructor-arg value="90" index="3" type="java.lang.Double"></constructor-arg>
+	</bean>
+	<bean id="s3" class="com.ted.spring.di.Student" p:id="3" p:name="趙六" p:age="40" p:score="100">
+	</bean>
+	
+	<bean id="s4" class="com.ted.spring.di.Student">
+		<property name="id" value="4"/>
+		<property name="name" value="王八"/>
+		<property name="age" value="20"/>
+		<property name="score" value="85"/>
+		<property name="teacher" ref="t1"/>
+	</bean>
+	
+	<bean id="t1" class="com.ted.spring.di.Teacher">
+		<property name="id" value="1"/>
+		<property name="name" value="老高"/>
+	</bean>
+	
+	<bean id="s5" class="com.ted.spring.di.Student">
+		<property name="id" value="4"/>
+		<property name="name" value="王八"/>
+		<property name="age" value="20"/>
+		<property name="score" value="85"/>
+		<property name="teacher">
+			<bean id="tt" class="com.ted.spring.di.Teacher">
+				<property name="id" value="2"/>
+				<property name="name" value="小莫"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="t2" class="com.ted.spring.di.Teacher">
+		<property name="id" value="3"/>
+		<property name="name" value="老肉"/>
+		<property name="classes">
+			<list>
+				<value>甲</value>
+				<value>丁</value>
+				<value>己</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="t3" class="com.ted.spring.di.Teacher">
+		<property name="id" value="4"/>
+		<property name="name" value="大莫"/>
+		<property name="students">
+			<list>
+				<ref bean="s1"/>
+				<ref bean="s2"/>
+				<ref bean="s5"/>
+			</list>
+		</property>
+	</bean>
+	<bean id="t4" class="com.ted.spring.di.Teacher">
+		<property name="id" value="4"/>
+		<property name="name" value="大莫"/>
+		<property name="bossMap">
+			<map>
+				<entry>
+					<key>
+						<value>1</value>
+					</key>
+					<value>十老頭</value>
+				</entry>
+				<entry>
+					<key>
+						<value>2</value>
+					</key>
+					<value>五老婦</value>
+				</entry>
+			</map>
+		</property>
 	</bean>
 </beans>
