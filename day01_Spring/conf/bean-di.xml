@@ -2,52 +2,56 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-	
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
 	<bean id="s1" class="com.ted.spring.di.Student">
-		<property name="id" value="1"/>
-		<property name="name" value="李一"/>
-		<property name="age" value="20"/>
+		<property name="id" value="1" />
+		<property name="name" value="李一" />
+		<property name="age" value="20" />
 	</bean>
-	
+
 	<bean id="s2" class="com.ted.spring.di.Student">
 		<constructor-arg value="2"></constructor-arg>
 		<constructor-arg value="李二"></constructor-arg>
 		<constructor-arg value="25"></constructor-arg>
-		<constructor-arg value="90" index="3" type="java.lang.Double"></constructor-arg>
+		<constructor-arg value="90" index="3"
+			type="java.lang.Double"></constructor-arg>
 	</bean>
+	
 	<bean id="s3" class="com.ted.spring.di.Student" p:id="3" p:name="趙六" p:age="40" p:score="100">
 	</bean>
-	
+
 	<bean id="s4" class="com.ted.spring.di.Student">
-		<property name="id" value="4"/>
-		<property name="name" value="王八"/>
-		<property name="age" value="20"/>
-		<property name="score" value="85"/>
-		<property name="teacher" ref="t1"/>
+		<property name="id" value="4" />
+		<property name="name" value="王八" />
+		<property name="age" value="20" />
+		<property name="score" value="85" />
+		<property name="teacher" ref="t1" />
 	</bean>
-	
+
 	<bean id="t1" class="com.ted.spring.di.Teacher">
-		<property name="id" value="1"/>
-		<property name="name" value="老高"/>
+		<property name="id" value="1" />
+		<property name="name" value="老高" />
 	</bean>
-	
+
 	<bean id="s5" class="com.ted.spring.di.Student">
-		<property name="id" value="4"/>
-		<property name="name" value="王八"/>
-		<property name="age" value="20"/>
-		<property name="score" value="85"/>
+		<property name="id" value="4" />
+		<property name="name" value="王八" />
+		<property name="age" value="20" />
+		<property name="score" value="85" />
 		<property name="teacher">
 			<bean id="tt" class="com.ted.spring.di.Teacher">
-				<property name="id" value="2"/>
-				<property name="name" value="小莫"/>
+				<property name="id" value="2" />
+				<property name="name" value="小莫" />
 			</bean>
 		</property>
 	</bean>
-	
+
 	<bean id="t2" class="com.ted.spring.di.Teacher">
-		<property name="id" value="3"/>
-		<property name="name" value="老肉"/>
+		<property name="id" value="3" />
+		<property name="name" value="老肉" />
 		<property name="classes">
 			<list>
 				<value>甲</value>
@@ -57,19 +61,19 @@
 		</property>
 	</bean>
 	<bean id="t3" class="com.ted.spring.di.Teacher">
-		<property name="id" value="4"/>
-		<property name="name" value="大莫"/>
+		<property name="id" value="4" />
+		<property name="name" value="大莫" />
 		<property name="students">
 			<list>
-				<ref bean="s1"/>
-				<ref bean="s2"/>
-				<ref bean="s5"/>
+				<ref bean="s1" />
+				<ref bean="s2" />
+				<ref bean="s3" />
 			</list>
 		</property>
 	</bean>
 	<bean id="t4" class="com.ted.spring.di.Teacher">
-		<property name="id" value="4"/>
-		<property name="name" value="大莫"/>
+		<property name="id" value="4" />
+		<property name="name" value="大莫" />
 		<property name="bossMap">
 			<map>
 				<entry>
@@ -87,4 +91,26 @@
 			</map>
 		</property>
 	</bean>
+	
+	<bean id="t5" class="com.ted.spring.di.Teacher">
+		<property name="id" value="5" />
+		<property name="name" value="大高" />
+		<property name="students" ref="slist"></property>
+	</bean>
+
+	<util:list id="slist">
+		<ref bean="s4" />
+		<ref bean="s5" />
+	</util:list>
+	
+	<bean id="t6" class="com.ted.spring.di.Teacher">
+		<property name="id" value="6" />
+		<property name="name" value="莫高" />
+		<property name="bossMap" ref="bMap"></property>
+	</bean>
+	
+	<util:map id="bMap">
+		<entry key="1" value="十小孩"></entry>
+		<entry key="2" value="五女孩"></entry>
+	</util:map>
 </beans>
